@@ -6,6 +6,7 @@ class MusicPortalApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (_) => MainScreen(),
@@ -34,28 +35,42 @@ class AuthScreen extends StatelessWidget {
   InputDecoration roundedInput(String label) {
     return InputDecoration(
       labelText: label,
+      labelStyle: const TextStyle(color: Colors.black),
       filled: true,
       fillColor: Colors.grey[200],
-      border: OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide.none,
+        borderSide: const BorderSide(color: Colors.black),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(color: Colors.black, width: 2),
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     );
   }
+
+  TextStyle blackText = const TextStyle(color: Colors.black);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Music Portal',
-            style: TextStyle(fontStyle: FontStyle.italic)),
-        backgroundColor: Colors.purple[200],
+            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black)),
+        backgroundColor: Color(0xff8a4497),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pushReplacementNamed(context, '/'),
         ),
-        actions: [Icon(Icons.account_circle)],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(
+                right: 12.0), // Mover el icono un poco a la izquierda
+            child: Icon(Icons.account_circle,
+                color: Colors.black, size: 34), // Agrandado
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -73,78 +88,32 @@ class AuthScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {},
-                      child: const Text('¿Olvidaste tu contraseña?',
-                          style: TextStyle(color: Color(0xff000000))),
+                      child: const Text('¿Olvidaste tu contraseña?'),
+                      style:
+                          TextButton.styleFrom(foregroundColor: Colors.black),
                     ),
                   ),
                   const SizedBox(height: 10),
                   const Text('Login',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                          child: TextField(decoration: roundedInput('User'))),
+                        child: TextField(
+                          decoration: roundedInput('User'),
+                          style: blackText,
+                        ),
+                      ),
                       const SizedBox(width: 10),
                       Flexible(
-                          child: TextField(decoration: roundedInput('Pass'))),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(onPressed: () {}, child: const Text('Volver')),
-                      const Text('|'),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text('Iniciar Sesión')),
-                    ],
-                  ),
-                  const Divider(height: 40, thickness: 2),
-                  const Text('Register',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                          child: TextField(decoration: roundedInput('User'))),
-                      const SizedBox(width: 10),
-                      Flexible(
-                          child: TextField(decoration: roundedInput('Email'))),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                          child: TextField(decoration: roundedInput('Pass'))),
-                      const SizedBox(width: 10),
-                      Flexible(
-                          child: TextField(decoration: roundedInput('Born'))),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                          child: TextField(decoration: roundedInput('Tel'))),
-                      const SizedBox(width: 10),
-                      Flexible(
-                        child: DropdownButtonFormField<String>(
-                          value: 'Ubc',
-                          items: ['Ubc', 'Uni1', 'Uni2']
-                              .map((uni) => DropdownMenuItem(
-                                  value: uni, child: Text(uni)))
-                              .toList(),
-                          onChanged: (value) {},
-                          decoration: roundedInput('Ubc'),
+                        child: TextField(
+                          decoration: roundedInput('Pass'),
+                          style: blackText,
                         ),
                       ),
                     ],
@@ -153,10 +122,106 @@ class AuthScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(onPressed: () {}, child: const Text('Volver')),
-                      const Text('|'),
                       TextButton(
-                          onPressed: () {}, child: const Text('Crear cuenta')),
+                          onPressed: () {},
+                          child: const Text('Volver'),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.black)),
+                      const Text('|', style: TextStyle(color: Colors.black)),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text('Iniciar Sesión'),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.black)),
+                    ],
+                  ),
+                  const Divider(height: 40, thickness: 2, color: Colors.black),
+                  const Text('Register',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: TextField(
+                          decoration: roundedInput('User'),
+                          style: blackText,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: TextField(
+                          decoration: roundedInput('Email'),
+                          style: blackText,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: TextField(
+                          decoration: roundedInput('Pass'),
+                          style: blackText,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: TextField(
+                          decoration: roundedInput('Born'),
+                          style: blackText,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: TextField(
+                          decoration: roundedInput('Tel'),
+                          style: blackText,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Flexible(
+                        child: DropdownButtonFormField<String>(
+                          value: 'Ubc',
+                          items: ['Ubc', 'Uni1', 'Uni2']
+                              .map((uni) => DropdownMenuItem(
+                                    value: uni,
+                                    child: Text(uni, style: blackText),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {},
+                          decoration: roundedInput('Ubc'),
+                          style: blackText,
+                          dropdownColor: Colors.grey[100],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text('Volver'),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.black)),
+                      const Text('|', style: TextStyle(color: Colors.black)),
+                      TextButton(
+                          onPressed: () {},
+                          child: const Text('Crear cuenta'),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.black)),
                     ],
                   ),
                 ],
@@ -172,9 +237,8 @@ class AuthScreen extends StatelessWidget {
 class PurpleSectionsPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = Colors.purple;
+    final paint = Paint()..color = Color(0xff7227b0);
 
-    // Parte superior inclinada
     final topPath = Path()
       ..moveTo(0, 0)
       ..lineTo(size.width, 0)
@@ -183,7 +247,6 @@ class PurpleSectionsPainter extends CustomPainter {
       ..close();
     canvas.drawPath(topPath, paint);
 
-    // Parte inferior inclinada
     final bottomPath = Path()
       ..moveTo(0, size.height)
       ..lineTo(size.width, size.height)
